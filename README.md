@@ -32,4 +32,31 @@ Les étapes de développement:
 2. Déployer le contrat sur un nœud local.
 3. Développer le frontend de l’application.
 
-### Notre projet : Une application de signature de documents
+## Notre projet : Une application de signature de documents
+
+Un utilisateur doit pouvoir ajouter un document à signer, signer un document, vérifier qui à signé le document. <br>
+Un document est représenté par son hash (fait dans le front). <br>
+On associera un uuid à chaque document afin de pouvoir simplement les retrouver dans le contrat.
+
+### Methode smart contract
+
+* Ajout de document (hash avec id)
+* Verification du document 
+* Signer un document
+* Verification des signataires
+  
+### Elements d'interface
+
+On souhaite réaliser une application one page qui se découpe en plusieur pages :
+
+* Déposer un document
+* Récupérer son hash
+* Ajouter le document à la blockchain pour être signé
+* Vérifier si le document est présent sur la blockchain
+* Lister les signataires du document
+
+
+
+
+
+
