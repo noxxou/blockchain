@@ -98,6 +98,8 @@ Les caractéristiques utilisées sont des informations concernants les montants 
 
 *Basé sur le travail de [CHITICARIU CRISTIAN](https://www.kaggle.com/code/chiticariucristian/fraud-detection-ethereum-transactions)*
 
+**Voilà les différentes étaeps à suivres pour supprimer les caractéristiques corrélées :**
+
 * **1.** Détecter les lignes où une ou plusieurs features sont nulles en utilisant une heatmap et les remplacer par la valeur médianne pour la feature.
 
 * **2.** Détecter les features dont la variance est nulle et les supprimer.
