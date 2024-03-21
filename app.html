@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Hello World DApp</title>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.5/web3.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <h1>A Simple Hello World Voting Application</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Candidate</th>
+                <th>Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Rama</td>
+                <td id="candidate-1"></td>
+            </tr>
+            <tr>
+                <td>Nick</td>
+                <td id="candidate-2"></td>
+            </tr>
+            <tr>
+                <td>Jose</td>
+                <td id="candidate-3"></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <input type="text" id="candidate" /> 
+    <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a> 
+</body> 
+</html>
