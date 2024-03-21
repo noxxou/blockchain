@@ -12,14 +12,15 @@
 * **Durée** : 5 Séance de TDs.
 * **Eléments attendus** : Présenter les réponses aux deux premières questions puis le code et le fonctionnement de l'application.
 
-### Première partie: 
+### Première partie
 
 Les deux questions suivantes concernent l’ensemble de donnée (Ethereum Fraud Detection Dataset https://www.kaggle.com/datasets/vagifa/ethereum-frauddetection-dataset):
 
 * **Question 1** : Quelles sont les caractéristiques utilisées pour détecter les fraudes en Ethereum ?
 * **Question 2** : Implémenter une technique pour supprimer les caractéristiques corrélées.
 
-### Deuxième partie:
+### Deuxième partie
+
 Implémenter une application DAPP, comme: ToDo list, voting...
 Les liens suivants présent des idées:
 
@@ -28,6 +29,7 @@ Les liens suivants présent des idées:
 * ToDo List: How to Build Ethereum Dapp with React.js· Complete Step-By-Step Guide, https://www.dappuniversity.com/articles/ethereum-dapp-react-tutorial
 
 Les étapes de développement:
+
 1. Développer le contrat intelligent, ce sera le backend de l’application.
 2. Déployer le contrat sur un nœud local.
 3. Développer le frontend de l’application.
@@ -41,7 +43,7 @@ On associera un uuid à chaque document afin de pouvoir simplement les retrouver
 ### Methode smart contract
 
 * Ajout de document (hash avec id)
-* Verification du document 
+* Verification du document
 * Signer un document
 * Verification des signataires
   
@@ -55,8 +57,24 @@ On souhaite réaliser une application one page qui se découpe en plusieur pages
 * Vérifier si le document est présent sur la blockchain
 * Lister les signataires du document
 
+### Lancer le projet
 
+1. Compiler le smart contract :
 
+```bash
+npm run compile
+```
 
+2. Lancer ganache-cli :
 
+```bash
+ganache-cli
+```
 
+3. Initialiser l'application :
+
+```bash
+npm run startapp
+```
+
+Puis ouvrir la app.html dans le navigateur.
