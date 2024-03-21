@@ -1,0 +1,57 @@
+:root {
+    --accent : rgb(87, 160, 255);
+}
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+header {
+    background-color: var(--accent);
+    margin: 0;
+    padding: 20px;
+    color: whitesmoke;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    margin: 0;
+}
+section {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    max-width: 800px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid var(--accent);
+}
+section > h2 {
+    width: 100%;
+    margin: 0;
+    color: var(--accent);
+}
+section > p {
+    margin: 0;
+}
+section#file textarea {
+    width: 100%;
+    height: 150px;
+    resize: vertical;
+}
+.warning {
+    background-color: black;
+    color: yellow;
+    padding: 2px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+.hidden {
+    display: none;
+}

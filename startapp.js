@@ -1,5 +1,5 @@
 const { Web3 } = require('web3');
-const { readFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 
 async function main() {
 
@@ -21,10 +21,10 @@ async function main() {
         contractInstance = newContractInstance;
     })
 
-    console.log(contractInstance.options.address);
-
+    let constsContent = '';
+    constsContent += `const abi = ${JSON.stringify(abi)};\n`;
+    constsContent += `const contractAdress = '${contractInstance.options.address}';\n`;
+    writeFileSync('consts.js', constsContent);
 }
-
-
 
 main();
