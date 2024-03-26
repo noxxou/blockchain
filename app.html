@@ -24,8 +24,6 @@
             <p>
                 <label for="filepicker">Choisir un fichier :</label>
                 <input type="file" name="filepicker" id="filepicker">
-                <br>
-                <span class="warning hidden" id="hasheditwarn">Le hash a été modifié et ne correspond plus au fichier.</span>
             </p>
             <p>
                 <label for="hashview">Ou saisir un hash :</label>
@@ -38,7 +36,9 @@
             <p>
                 <button id="uploadfile">Charger sur la blockchain</button>
             </p>
-            <p></p>
+            <p>
+                <span class="hidden" id="uploadfile_result"></span>
+            </p>
         </section>
 
         <section id="fileonblockchain">
@@ -46,7 +46,9 @@
             <p>
                 <button id="checkfile">Vérifier présence sur la blockchain</button>
             </p>
-            <p></p>
+            <p>
+                <span class="hidden" id="fileonblockchain_result"></span>
+            </p>
         </section>
 
         <section id="sign">
@@ -54,7 +56,9 @@
             <p>
                 <button id="sign">Signer</button>
             </p>
-            <p></p>
+            <p>
+                <span class="hidden" id="sign_result"></span>
+            </p>
         </section>
 
         <section id="checksign">
@@ -64,10 +68,10 @@
                 <input type="text" name="chackedwallet" id="chackedwallet"> <br>
                 <button id="verify">Vérifier</button>
             </p>
-            <p></p>
+            <p>
+                <span class="hidden" id="checksign_result"></span>
+            </p>
         </section>
     </main>
-    
-
 </body> 
 </html>

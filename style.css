@@ -41,12 +41,28 @@ section > p {
 }
 section#file textarea {
     width: 100%;
-    height: 150px;
+    height: 50px;
     resize: vertical;
 }
 .warning {
     background-color: black;
     color: yellow;
+    padding: 2px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+.result {
+    background-color: rgb(125, 214, 107);
+    color: green;
+    padding: 2px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+.error {
+    background-color: rgb(228, 133, 133);
+    color: darkred;
     padding: 2px;
     display: block;
     text-align: center;

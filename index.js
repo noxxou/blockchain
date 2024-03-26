@@ -33,7 +33,6 @@ $(document).ready(function() {
 
     // Gestion de l'import de fichier
     $('input#filepicker').change(function() {
-        $('#hasheditwarn').addClass('hidden');
         const file = this.files[0];
         const reader = new FileReader();
         reader.onload = async function() {
@@ -47,27 +46,46 @@ $(document).ready(function() {
 
     // Gestion de la modification du hash
     $('textarea#hashview').change(function () {
-        if ($('input#filepicker').val() != '') {
-            $('#hasheditwarn').removeClass('hidden');
-        }
         $('input#filepicker').val(null)
         file_hash = $(this).val()
     });
 
-    $('button#uploadfile').click(function () {
-        contract.methods.voteForCandidate(web3.utils.asciiToHex(candidateName)).send({
-            from: account
-        }).then((f) => {
-            let div_id = candidates[candidateName];
-            contract.methods.totalVotesFor(web3.utils.asciiToHex(candidateName)).call()
-            .then((f) => {
-                $("#" + div_id).html(f);
-            })
-        })
+    $('button#uploadfile').click(async function () {
+        const uploadfile_result = $('span#uploadfile_result');
+
+        contract.methods.addFile(web3.utils.asciiToHex(file_hash)).call({
+            from: account,
+            gas: '1000000'
+        }
+        ).then(function (response) {
+            uploadfile_result.text('Hash chargé avec succes.');
+            uploadfile_result.removeClass('hidden');
+            console.log(response);
+
+        }).catch(function (error) {
+            uploadfile_result.text(error.message)
+            uploadfile_result.removeClass('hidden');
+            console.log(error);
+        });
     });
 
-    $('button#chackfile').click(function () {
-        //TODO
+    $('button#checkfile').click(function () {
+        const resultDisplay = $('span#checkfile_result');
+        const errorDisplay = $('span#checkfile_result');
+
+        contract.methods.verifyFile(web3.utils.asciiToHex(file_hash)).call({
+            from: account,
+            gas: '1000000'
+        }
+        ).then(function (response) {
+            console.log(response)
+            resultDisplay.text('Hash chargé avec succes.');
+            resultDisplay.removeClass('hidden');
+
+        }).catch(function (error) {
+            errorDisplay.text(error.message)
+            errorDisplay.removeClass('hidden');
+        });
     });
 
     $('button#sign').click(function () {
@@ -78,18 +96,3 @@ $(document).ready(function() {
         //TODO
     });
 });
-
-
-
-
-function voteForCandidate(candidate) {
-    contract.methods.voteForCandidate(web3.utils.asciiToHex(candidateName)).send({
-        from: account
-    }).then((f) => {
-        let div_id = candidates[candidateName];
-        contract.methods.totalVotesFor(web3.utils.asciiToHex(candidateName)).call()
-        .then((f) => {
-            $("#" + div_id).html(f);
-        })
-    })
-}
