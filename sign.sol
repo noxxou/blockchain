@@ -12,14 +12,17 @@ contract Signe {
     mapping (uint => FileStruct) public FileList;
     uint[] public fileIdList;
 
-    event FichierAjoute(uint[] fileIdList);
+    function addFile(string memory new_hash)public returns(bool) {
+        if (verifyFile(new_hash)){
+            return false;
+        }
+        else {
+            uint new_id = nbFile++;
+            fileIdList.push(new_id);
+            FileList[new_id] = FileStruct(new_id, new_hash,new address[](0));
+            return true;
 
-
-    function addFile(string memory new_hash)public {
-        uint new_id = nbFile++;
-        fileIdList.push(new_id);
-        FileList[new_id] = FileStruct(new_id, new_hash,new address[](0));
-        emit FichierAjoute(fileIdList);
+        }
     }
 
     function addSign(string memory new_hash, address signataire)public {
