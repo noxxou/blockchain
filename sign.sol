@@ -1,27 +1,24 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.8.17;
+pragma solidity ^0.8.17;
 // We have to specify what version of compiler this code will compile with
 contract Signe {
 
     struct FileStruct{
-        uint id;
         string hash_string;
         address[] signataires;
     } 
     uint public nbFile;
-    mapping (uint => FileStruct) public FileList;
-    uint[] public fileIdList;
+    mapping (string => FileStruct) public FileList;
+    string [] public fileIdList;
 
     function addFile(string memory new_hash)public returns(bool) {
         if (verifyFile(new_hash)){
             return false;
         }
         else {
-            uint new_id = nbFile++;
-            fileIdList.push(new_id);
-            FileList[new_id] = FileStruct(new_id, new_hash,new address[](0));
+            fileIdList.push(new_hash);
+            FileList[new_hash] = FileStruct(new_hash,new address[](0));
             return true;
-
         }
     }
 
