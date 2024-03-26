@@ -50,10 +50,14 @@ $(document).ready(function() {
         file_hash = $(this).val()
     });
 
+    // Gestion de l'upload d'un hash sur la block chain
     $('button#uploadfile').click(async function () {
         const uploadfile_result = $('span#uploadfile_result');
 
-        contract.methods.addFile(web3.utils.asciiToHex(file_hash)).call({
+        console.log('hash', file_hash)
+        console.log('asciitohex', web3.utils.asciiToHex(file_hash))
+
+        contract.methods.addFile(file_hash).call({
             from: account,
             gas: '1000000'
         }
@@ -69,9 +73,9 @@ $(document).ready(function() {
         });
     });
 
+    // Vérification d'un fichier
     $('button#checkfile').click(function () {
-        const resultDisplay = $('span#checkfile_result');
-        const errorDisplay = $('span#checkfile_result');
+        const fileonblockchain_result = $('span#fileonblockchain_result');
 
         contract.methods.verifyFile(web3.utils.asciiToHex(file_hash)).call({
             from: account,
@@ -79,12 +83,12 @@ $(document).ready(function() {
         }
         ).then(function (response) {
             console.log(response)
-            resultDisplay.text('Hash chargé avec succes.');
-            resultDisplay.removeClass('hidden');
+            fileonblockchain_result.text('Hash chargé avec succes.');
+            fileonblockchain_result.removeClass('hidden');
 
         }).catch(function (error) {
-            errorDisplay.text(error.message)
-            errorDisplay.removeClass('hidden');
+            fileonblockchain_result.text(error.message)
+            fileonblockchain_result.removeClass('hidden');
         });
     });
 
@@ -94,5 +98,20 @@ $(document).ready(function() {
 
     $('button#checksign').click(function () {
         //TODO
+    });
+
+    $('button#listhashes_bt').click(function () {
+        const listhashes_result = $('span#listhashes_result');
+
+        contract.methods.getFileList().call({
+            from: account,
+            gas: '1000000'
+        }
+        ).then(function (response) {
+            console.log(response)
+        }).catch(function (error) {
+            listhashes_result.text(error.message)
+            listhashes_result.removeClass('hidden');
+        });
     });
 });
