@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>DAPP signature</title>
+    <meta name="authors" content="Axel Bacrie, Alexendre Lenfantin, Mehdi Khalil">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.5/web3.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="consts.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>DAPP Signature de documents</h1>
+        <label for="wallet-select">Wallet : </label>
+        <select id="wallet-select"></select>
+    </header>
+    <main>
+
+        
+        <section id="file">
+            <h2>Fichier / Hash</h2>
+            <p>
+                <label for="filepicker">Choisir un fichier :</label>
+                <input type="file" name="filepicker" id="filepicker">
+                <br>
+                <span class="warning hidden" id="hasheditwarn">Le hash a été modifié et ne correspond plus au fichier.</span>
+            </p>
+            <p>
+                <label for="hashview">Ou saisir un hash :</label>
+                <textarea name="hashview" id="hashview"></textarea>
+            </p>
+        </section>
+
+        <section id="uploadfile">
+            <h2>Charger</h2>
+            <p>
+                <button id="uploadfile">Charger sur la blockchain</button>
+            </p>
+            <p></p>
+        </section>
+
+        <section id="fileonblockchain">
+            <h2>Vérifier existence</h2>
+            <p>
+                <button id="checkfile">Vérifier présence sur la blockchain</button>
+            </p>
+            <p></p>
+        </section>
+
+        <section id="sign">
+            <h2>Signer</h2>
+            <p>
+                <button id="sign">Signer</button>
+            </p>
+            <p></p>
+        </section>
+
+        <section id="checksign">
+            <h2>Vérifier signature</h2>
+            <p>
+                <label for="chackedwallet">Wallet à vérifier</label>
+                <input type="text" name="chackedwallet" id="chackedwallet"> <br>
+                <button id="verify">Vérifier</button>
+            </p>
+            <p></p>
+        </section>
+    </main>
+    
+
+</body> 
+</html>

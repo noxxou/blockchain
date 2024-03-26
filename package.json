@@ -1,0 +1,15 @@
+{
+  "name": "blockchain_projet",
+  "version": "1.0.0",
+  "description": "Une application dapp de signature de document en web3. Dans le cadre du cours de blockchain de S8 de l'ENSIBS.",
+  "scripts": {
+    "compile": "node ./node_modules/.bin/solcjs --bin --abi sign.sol",
+    "startapp": "node startapp"
+  },
+  "author": "Axel.Bacrie, Alexendre.Lenfantin, Mehdi.Khalil",
+  "license": "ISC",
+  "dependencies": {
+    "solc": "0.8.17",
+    "web3": "^4.6.0"
+  }
+}
