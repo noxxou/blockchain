@@ -6,7 +6,7 @@
 
 ## Enoncé
 
-* **Projet** : Explorer un Ensemble de Données pour Détecter les Fraudes en Ethereum puis Développer une Application WEB3 Décentralisée (DApp) 
+* **Projet** : Explorer un Ensemble de Données pour Détecter les Fraudes en Ethereum puis Développer une Application WEB3 Décentralisée (DApp)
 * **Groups** : 3 élèves max.
 * **Présentation** : Le dernier TD.
 * **Durée** : 5 Séance de TDs.
