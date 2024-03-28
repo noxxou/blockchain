@@ -1,10 +1,10 @@
-# Projet de blockchain ENSIBS Cyberdata S8
+= Projet de blockchain ENSIBS Cyberdata S8
 
 * Alexendre Lenfantin
 * Axel Bacrie
 * Mehdi Khalil
 
-## Enoncé
+== Enoncé
 
 * **Projet** : Explorer un Ensemble de Données pour Détecter les Fraudes en Ethereum puis Développer une Application WEB3 Décentralisée (DApp) 
 * **Groups** : 3 élèves max.
@@ -12,14 +12,16 @@
 * **Durée** : 5 Séance de TDs.
 * **Eléments attendus** : Présenter les réponses aux deux premières questions puis le code et le fonctionnement de l'application.
 
-### Première partie
+=== Première partie
 
 Les deux questions suivantes concernent l’ensemble de donnée (Ethereum Fraud Detection Dataset https://www.kaggle.com/datasets/vagifa/ethereum-frauddetection-dataset):
 
 * **Question 1** : Quelles sont les caractéristiques utilisées pour détecter les fraudes en Ethereum ?
 * **Question 2** : Implémenter une technique pour supprimer les caractéristiques corrélées.
 
-### Deuxième partie
+Les éléments de réponce sont donnés en annexe à la fin de ce document.
+
+=== Deuxième partie
 
 Implémenter une application DAPP, comme: ToDo list, voting...
 Les liens suivants présent des idées:
@@ -34,30 +36,33 @@ Les étapes de développement:
 2. Déployer le contrat sur un nœud local.
 3. Développer le frontend de l’application.
 
-## Notre projet : Une application de signature de documents
+== Notre projet : Une application de signature de documents
 
 Un utilisateur doit pouvoir ajouter un document à signer, signer un document, vérifier qui à signé le document. <br>
 Un document est représenté par son hash (fait dans le front). <br>
-On associera un uuid à chaque document afin de pouvoir simplement les retrouver dans le contrat.
 
-### Methode smart contract
+=== Methode smart contract
 
 * Ajout de document (hash avec id)
 * Verification du document
 * Signer un document
 * Verification des signataires
   
-### Elements d'interface
+=== Elements d'interface
 
 On souhaite réaliser une application one page qui se découpe en plusieur pages :
 
-* Déposer un document
-* Récupérer son hash
-* Ajouter le document à la blockchain pour être signé
-* Vérifier si le document est présent sur la blockchain
-* Lister les signataires du document
+* Déposer un document.
+* Récupérer son hash.
+* Ajouter le document à la blockchain pour être signé.
+* Vérifier si le document est présent sur la blockchain.
+* Vérifier si un wallet a signé un document.
 
-### Lancer le projet
+=== Lancer le projet
+
+Le projet nécessite nodejs, et ganache-cli.
+
+Vous pouvez trouver le code dans le repo github : https://github.com/noxxou/blockchain
 
 1. Compiler le smart contract :
 
@@ -77,4 +82,19 @@ ganache-cli
 npm run startapp
 ```
 
-Puis ouvrir la app.html dans le navigateur.
+4. Puis ouvrir le fichier app.html dans le navigateur.
+
+### L'application
+
+.Capture d'écran de l'application.
+image:screen_app.png[]
+
+On retrouve différents éléments qui permettent d'utiliser les actions cités plu haut.
+
+. Un menu déroulant permettant de sélectionner le wallet avec lequel on travaille. Cela n'est possible que dans ce contexte où nous utilisons ganache-cli.
+. **Fichier / Hash** : permet de déposer un fichier (son hash directement donné en-dessous) ou de directement donner un hash. Ce hash sera pris en compte pour toutes les prochaines fonctionalitées.
+. **Charger** : permet de poster le hash sur la blockchain pour pouvoir le signer.
+. **Vérifier** : permet de vérifier si le hash à déjà été importé.
+. **Signer** : signe le hash avec le wallet actuel.
+. **Vérifier signature** : En donnant une adresse de wallet au format `0x....`, on peut vérifier su cette adresse a signé le fichier.
+. **Lister** : permet de lister les hash sur la block chaine et indique le nombre de signataire.

@@ -12,6 +12,18 @@ async function sha256(message) {
     return hashHex;
 }
 
+function show_result(resultblock, text, error=false, warn=false) {
+    $(resultblock).text(text);
+    $(resultblock).removeClass('hidden error warning result');
+    if (error) {
+        $(resultblock).addClass('error');
+    } else if (warn) {
+        $(resultblock).addClass('warning');
+    } else {
+        $(resultblock).addClass('result');
+    }
+}
+
 $(document).ready(function() {
     // Création du selecteur de wallet
     web3.eth.getAccounts().then(function(accounts) {
@@ -52,66 +64,81 @@ $(document).ready(function() {
 
     // Gestion de l'upload d'un hash sur la block chain
     $('button#uploadfile').click(async function () {
-        const uploadfile_result = $('span#uploadfile_result');
-
-        console.log('hash', file_hash)
-        console.log('asciitohex', web3.utils.asciiToHex(file_hash))
-
-        contract.methods.addFile(file_hash).call({
+        contract.methods.addFile(file_hash).send({
             from: account,
             gas: '1000000'
         }
         ).then(function (response) {
-            uploadfile_result.text('Hash chargé avec succes.');
-            uploadfile_result.removeClass('hidden');
-            console.log(response);
-
+            show_result($('span#uploadfile_result'), 'Hash ajouté');
         }).catch(function (error) {
-            uploadfile_result.text(error.message)
-            uploadfile_result.removeClass('hidden');
-            console.log(error);
+            show_result($('span#uploadfile_result'), error, true);
         });
     });
 
     // Vérification d'un fichier
     $('button#checkfile').click(function () {
-        const fileonblockchain_result = $('span#fileonblockchain_result');
-
-        contract.methods.verifyFile(web3.utils.asciiToHex(file_hash)).call({
+        contract.methods.verifyFile(file_hash).call({
             from: account,
             gas: '1000000'
         }
         ).then(function (response) {
-            console.log(response)
-            fileonblockchain_result.text('Hash chargé avec succes.');
-            fileonblockchain_result.removeClass('hidden');
-
+            show_result($('span#fileonblockchain_result'), response ? 'Hash présent sur la blockchain' : 'Hash abscent de la blockchain', false, !response);
         }).catch(function (error) {
-            fileonblockchain_result.text(error.message)
-            fileonblockchain_result.removeClass('hidden');
+            show_result($('span#fileonblockchain_result'), error, true);
         });
     });
 
+    // Signer un hash
     $('button#sign').click(function () {
-        //TODO
-    });
-
-    $('button#checksign').click(function () {
-        //TODO
-    });
-
-    $('button#listhashes_bt').click(function () {
-        const listhashes_result = $('span#listhashes_result');
-
-        contract.methods.getFileList().call({
+        contract.methods.addSign(file_hash, account).send({
             from: account,
             gas: '1000000'
         }
         ).then(function (response) {
-            console.log(response)
+            show_result($('span#sign_result'), "Fichier signé");
         }).catch(function (error) {
-            listhashes_result.text(error.message)
-            listhashes_result.removeClass('hidden');
+            show_result($('span#sign_result'), error, true);
+        });
+    });
+
+    // Vérifier une signature
+    $('button#checksign').click(function () {
+        const checked_wallet = $('input#chackedwallet').val()
+        contract.methods.verifySign(file_hash, checked_wallet).call({
+            from: account,
+            gas: '1000000'
+        }
+        ).then(function (response) {
+            show_result($('span#checksign_result'), response ? 'Hash signé par le wallet' : 'Hash non signé par le wallet', false, !response);
+        }).catch(function (error) {
+            show_result($('span#checksign_result'), error, true);
+        });
+    });
+
+    // Lister les hashs
+    $('button#listhashes_bt').click(function () {
+        contract.methods.getFileList().call({
+            from: account,
+            gas: '1000000'
+        })
+        .then(function (response) {
+            $('table#listhashes_result_tab').remove();
+            var tableau = $('<table>').attr('id', 'listhashes_result_tab');
+            var head_ligne = $('<tr>');
+            head_ligne.append($('<th>').text('Hash'));
+            head_ligne.append($('<th>').text('Nombre de signature'));
+            tableau.append(head_ligne);
+
+            response.forEach(function (element) {
+                var ligne = $('<tr>');
+                ligne.append($('<td>').text(JSON.stringify(element[0])));
+                ligne.append($('<td>').text(JSON.stringify(element[1].length)));
+                tableau.append(ligne);
+            });
+            $('span#listhashes_result').append(tableau).removeClass('hidden');
+        })
+        .catch(function (error) {
+            show_result($('span#listhashes_result'), error, true);
         });
     });
 });

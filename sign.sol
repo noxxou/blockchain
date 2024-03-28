@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.17;
+pragma solidity 0.8.17;
 // We have to specify what version of compiler this code will compile with
 contract Signe {
 
@@ -25,10 +25,10 @@ contract Signe {
     function addSign(string memory new_hash, address signataire)public {
         for(uint i = 0; i < fileIdList.length; i++) {
             if (compareStrings(FileList[fileIdList[i]].hash_string, new_hash)) {
-                FileList[fileIdList[i]].signataires.push(signataire);
-                break;
-            }
+            FileList[fileIdList[i]].signataires.push(signataire);
+            break;
         }
+    }
     }
     
     function verifyFile(string memory new_hash) view public returns(bool) {
@@ -52,7 +52,7 @@ contract Signe {
             }
         }
         return false;
-    }
+        }
 
     function compareStrings(string memory a, string memory b) internal pure returns (bool) {
         return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
